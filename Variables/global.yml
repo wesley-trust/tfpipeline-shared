@@ -1,4 +1,0 @@
-# Define global variables
-variables:
-- group: 'ServicePrincipal'
-- group: 'terraform-backend'

@@ -28,6 +28,6 @@ steps:
 # Scan with Regula
 - bash: |
     # Scan files with Regula
-    regula run $(System.DefaultWorkingDirectory)/Deployments/$(Module)/ -s critical
+    regula run $(System.DefaultWorkingDirectory) -s critical
   name: 'RegulaScan'
   displayName: 'Scan Terraform files with Regula'

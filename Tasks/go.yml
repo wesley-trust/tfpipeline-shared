@@ -12,8 +12,8 @@ steps:
   inputs:
     command: 'custom'
     customCommand: 'mod'
-    arguments: 'init $(Module)'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
+    arguments: 'init module'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tests'
 
 # Add module dependencies
 - task: Go@0
@@ -22,7 +22,7 @@ steps:
     command: 'custom'
     customCommand: 'mod'
     arguments: 'tidy'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tests'
 
 # Run Go Test
 - task: Go@0
@@ -30,7 +30,7 @@ steps:
   inputs:
     command: 'test'
     arguments: '-timeout 1h ${{ parameters.arguments }}'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tests'
   env:
       ARM_TENANT_ID: $(TenantId)
       ARM_CLIENT_ID: $(ServicePrincipalId)

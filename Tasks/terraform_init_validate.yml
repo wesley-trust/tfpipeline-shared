@@ -5,7 +5,7 @@ steps:
   displayName: 'Terraform Initialise'
   inputs:
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
     backendType: 'azurerm'
     backendServiceArm: '$(backendServiceArm)'
     ensureBackend: true
@@ -20,4 +20,4 @@ steps:
   displayName: 'Terraform Validate'
   inputs:
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
