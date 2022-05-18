@@ -2,6 +2,7 @@ steps:
 
 # Checkout local repo
 - checkout: self
+  displayName: 'Checkout repository'
   path: s/
 
 # Terraform install step
