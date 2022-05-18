@@ -1,0 +1,10 @@
+steps:
+
+# Create workspace (if does not exist)
+- task: TerraformCLI@0
+  displayName: 'Terraform Workspace creation'
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    command: 'workspace'
+    workspaceSubCommand: 'new'
+    workspaceName: $(Environment)

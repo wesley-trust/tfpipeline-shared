@@ -1,0 +1,14 @@
+steps:
+
+# Terraform steps
+- template: ../Tasks/terraform_init.yml
+- template: ../Tasks/workspace.yml
+
+# Terraform Apply
+- template: ../Tasks/terraform.yml
+  parameters:
+    name: 'Apply'
+    displayName: 'Terraform Apply'
+    condition: succeeded()
+    command: 'apply'
+    commandOptions: '$(Pipeline.Workspace)/Evaluate/apply_terraform.tfplan'
