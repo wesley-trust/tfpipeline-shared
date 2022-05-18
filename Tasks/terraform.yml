@@ -7,7 +7,7 @@ steps:
   displayName: '${{ parameters.displayName }}'
   inputs:
     command: '${{ parameters.command }}'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/$(Service)/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
     environmentServiceName: '$(backendServiceArm)'
     publishPlanResults: '${{ parameters.publishPlanResults }}'
     commandOptions: '${{ parameters.commandOptions }}'
