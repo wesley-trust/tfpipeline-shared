@@ -2,6 +2,7 @@ steps:
 
 # Terraform steps
  - template: ../Tasks/terraform_init.yml
+
 # - template: ../Tasks/terraform_validate.yml
 
 # Regula steps
