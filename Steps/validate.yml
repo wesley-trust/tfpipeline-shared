@@ -11,12 +11,4 @@ steps:
 # - template: ../Tasks/regula_scan_hcl.yml
 
 # Select workspace (if exists)
-- task: TerraformCLI@0
-  name: 'select'
-  continueOnError: true
-  displayName: 'Terraform Workspace import'
-  inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    command: 'workspace'
-    workspaceSubCommand: 'select'
-    workspaceName: $(Environment)
+- template: ../Tasks/workspace.yml
