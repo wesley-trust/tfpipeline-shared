@@ -1,16 +1,12 @@
 steps:
 
-# Terraform steps
-- template: ../Tasks/terraform_init.yml
-- template: ../Tasks/terraform_validate.yml
+# Go Steps
+- template: ../Tasks/go.yml
+  parameters:
+    arguments: '-v unit_test.go'
 
 # Regula steps
 - template: ../Tasks/regula.yml
 
 # Regula scan step
 - template: ../Tasks/regula_scan_hcl.yml
-
-# Go Steps
-- template: ../Tasks/go.yml
-  parameters:
-    arguments: '-v unit_test.go'
