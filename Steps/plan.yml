@@ -27,7 +27,7 @@ steps:
     # Generate JSON plan
     terraform show -json $(Pipeline.Workspace)/Output/apply_terraform.tfplan >$(System.ArtifactsDirectory)/plan.json
     # Scan plan
-    regula run $(System.ArtifactsDirectory)/plan.json -s high
+    regula run $(System.ArtifactsDirectory)/plan.json -s critical
   name: 'RegulaScan'
   displayName: 'Scan Terraform Plan with Regula'
 
