@@ -5,6 +5,9 @@ steps:
   parameters:
     arguments: '-v unit_test.go'
 
+# Terraform steps
+- template: ../Tasks/terraform_init.yml
+
 # Regula steps
 - template: ../Tasks/regula.yml
 
