@@ -1,2 +1,2 @@
 # tfpipeline-shared
-Shared Terraform Pipeline files for Azure DevOps
+Terraform pipeline shared Steps and Tasks for use with Azure DevOps Pipelines
