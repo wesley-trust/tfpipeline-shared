@@ -17,10 +17,12 @@ steps:
     # Add filename to variable
     REGULA=$(ls -p | grep -v /)
     # Extract archive
+    echo 'Extracting archive'
     tar -xf $REGULA
     # Remove archive
     rm --f $REGULA
     # Add Regula to PATH
+    echo 'Adding to PATH'
     echo "##vso[task.prependpath]$(System.ArtifactsDirectory)/regula"
   name: 'ConfigureRegula'
   displayName: 'Configure Regula'
