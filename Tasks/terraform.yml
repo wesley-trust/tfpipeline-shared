@@ -11,3 +11,6 @@ steps:
     environmentServiceName: '$(backendServiceArm)'
     publishPlanResults: '${{ parameters.publishPlanResults }}'
     commandOptions: '${{ parameters.commandOptions }}'
+  env:
+    AZDO_PERSONAL_ACCESS_TOKEN: $(github_pat)
+    AZDO_ORG_SERVICE_URL: $(org_url)
