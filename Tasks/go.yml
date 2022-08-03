@@ -36,3 +36,5 @@ steps:
       ARM_CLIENT_ID: $(ServicePrincipalId)
       ARM_CLIENT_SECRET: $(ServicePrincipalKey)
       ARM_SUBSCRIPTION_ID: $(SubscriptionId)
+      AZDO_PERSONAL_ACCESS_TOKEN: $(org_pat)
+      AZDO_ORG_SERVICE_URL: $(org_url)
