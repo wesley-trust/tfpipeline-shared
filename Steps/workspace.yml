@@ -1,5 +1,8 @@
 steps:
 
+# Terraform init
+- template: ../Tasks/terraform_init.yml
+
 # Create workspace (if does not exist)
 - task: TerraformCLI@0
   displayName: 'Terraform Workspace creation'
