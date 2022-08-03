@@ -3,6 +3,7 @@ steps:
 # Select workspace (if exists)
 - task: TerraformCLI@0
   displayName: 'Terraform Workspace select'
+  continueOnError: true
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'workspace'
