@@ -15,6 +15,7 @@ steps:
     # Change to directory containing opa download
     cd $(System.ArtifactsDirectory)/opa
     # Rename download
+    echo 'Renaming executable'
     mv opa_linux_amd64 opa
     # Add OPA to PATH
     echo 'Adding to PATH'
