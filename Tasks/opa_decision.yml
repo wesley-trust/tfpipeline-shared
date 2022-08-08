@@ -1,6 +1,6 @@
 steps:
 
-# Evaluate Terraform Plan with OPA
+# Evaluate Plan with OPA
 - bash: |
     # Set working directory
     cd $(System.DefaultWorkingDirectory)
@@ -10,4 +10,4 @@ steps:
     opa exec --decision terraform/analysis/authz --bundle policy/ $(System.ArtifactsDirectory)/plan.json > $(Pipeline.Workspace)/Output/opa_decision.json
     opa exec --decision terraform/analysis/score --bundle policy/ $(System.ArtifactsDirectory)/plan.json > $(Pipeline.Workspace)/Output/opa_score.json
   name: 'OPADecision'
-  displayName: 'Evaluate Terraform Plan with OPA'
+  displayName: 'Evaluate Plan with OPA'
