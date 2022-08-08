@@ -4,7 +4,7 @@ steps:
 - bash: |
     if [ "$TERRAFORM_PLAN_HAS_CHANGES" = true ] ; then
       echo "##vso[task.setvariable variable=ShouldRun;isOutput=true]true"
-      echo "Terraform Plan has changes, so a ShouldRun variable will be set for Terraform Apply"
+      echo 'Terraform Plan has changes, so a ShouldRun variable will be set for Terraform Apply'
       fi
   name: 'Variable'
   displayName: 'Set Terraform Plan variable'
