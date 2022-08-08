@@ -2,9 +2,16 @@ steps:
 
 # Set OPA Decision Variable 
 - pwsh: |
-    $Decision = Get-Content $(Pipeline.Workspace)/Output/opa_decision.json | ConvertFrom-Json
-    if ($Decision.result.result -eq $true){
+    # Import JSON
+    $Decision = (Get-Content $(Pipeline.Workspace)/Output/opa_decision.json | ConvertFrom-Json).result
+    $Score = (Get-Content $(Pipeline.Workspace)/Output/opa_score.json | ConvertFrom-Json).result
+    # Set variables and return messages as appropriate
+    if ($Decision.result -eq $true){
       Write-Output "##vso[task.setvariable variable=AutoApproveShouldRun;isOutput=true]true"
+      Write-Host "Evaluation of OPA Policy is true, with a score of $($Score.result), so a variable for AutoApply will be set"
+    }
+    else {
+      Write-Host "Evaluation of OPA Policy is false, with a score of $($Score.result), so a variable for AutoApply will not be set"
     }
   name: 'OPAVariable'
   displayName: 'Set OPA Decision Variable'
