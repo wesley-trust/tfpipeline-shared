@@ -29,6 +29,9 @@ steps:
 # Evaluate OPA Policy
 - template: ../Tasks/opa_decision.yml
 
+# Set pipeline output variable if OPA has auto approved
+- template: ../Tasks/opa_variable.yml
+
 # Set pipeline output variable if there are changes
 - template: ../Tasks/variable.yml
 
