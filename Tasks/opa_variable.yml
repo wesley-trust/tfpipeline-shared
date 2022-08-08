@@ -8,10 +8,10 @@ steps:
     # Set variables and return messages as appropriate
     if ($Decision.result -eq $true){
       Write-Output "##vso[task.setvariable variable=AutoApproveShouldRun;isOutput=true]true"
-      Write-Host "Evaluation of OPA Policy is true, with a score of $($Score.result), so a variable for AutoApply will be set"
+      Write-Host "Evaluation of OPA Policy is true, with a blast radius score of $($Score.result), so a variable for AutoApply will be set"
     }
     else {
-      Write-Host "Evaluation of OPA Policy is false, with a score of $($Score.result), so a variable for AutoApply will not be set"
+      Write-Host "Evaluation of OPA Policy is false, with a blast radius score of $($Score.result), so a variable for AutoApply will not be set"
     }
   name: 'OPAVariable'
   displayName: 'Set OPA Decision Variable'
