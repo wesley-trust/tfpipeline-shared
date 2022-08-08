@@ -4,6 +4,9 @@ steps:
 - template: ../Tasks/terraform_init.yml
 - template: ../Tasks/workspace.yml
 
+# Download artifact
+- template: ../Tasks/artifact_download.yml
+
 # Terraform Apply
 - template: ../Tasks/terraform.yml
   parameters:
