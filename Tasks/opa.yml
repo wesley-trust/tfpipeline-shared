@@ -1,0 +1,23 @@
+steps:
+
+# Download OPA
+- task: DownloadGitHubRelease@0
+  displayName: 'Download OPA'
+  inputs:
+    connection: 'wesley-trust'
+    userRepository: 'open-policy-agent/opa'
+    defaultVersionType: 'latest'
+    itemPattern: 'opa_linux_amd64'
+    downloadPath: '$(System.ArtifactsDirectory)/opa' 
+
+# Configure OPA
+- bash: |
+    # Change to directory containing opa download
+    cd $(System.ArtifactsDirectory)/opa
+    # Rename download
+    mv opa_linux_amd64 opa
+    # Add OPA to PATH
+    echo 'Adding to PATH'
+    echo "##vso[task.prependpath]$(System.ArtifactsDirectory)/opa"
+  name: 'ConfigureOPA'
+  displayName: 'Configure OPA'

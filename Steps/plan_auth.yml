@@ -23,6 +23,12 @@ steps:
 # Scan Terraform Plan with Regula
 - template: ../Tasks/regula_scan_plan.yml
 
+# OPA steps
+- template: ../Tasks/opa.yml
+
+# Evaluate OPA Policy
+- template: ../Tasks/opa_decision.yml
+
 # Set pipeline output variable if there are changes
 - template: ../Tasks/variable.yml
 

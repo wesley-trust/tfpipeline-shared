@@ -21,15 +21,7 @@ steps:
 - template: ../Tasks/regula.yml
 
 # Scan Terraform Plan with Regula
-- bash: |
-    # Set working directory
-    cd $(System.DefaultWorkingDirectory)
-    # Generate JSON plan
-    terraform show -json $(Pipeline.Workspace)/Output/reapply_terraform.tfplan >$(System.ArtifactsDirectory)/plan.json
-    # Scan plan
-    regula run $(System.ArtifactsDirectory)/plan.json -s critical
-  name: 'RegulaScan'
-  displayName: 'Scan Terraform Plan with Regula'
+- template: ../Tasks/regula_scan_plan.yml
 
 # Set pipeline output variable if there are changes
 - template: ../Tasks/variable.yml
