@@ -17,6 +17,8 @@ steps:
     # Rename download
     echo 'Renaming executable'
     mv opa_linux_amd64 opa
+    # Make OPA executable
+    chmod +x opa
     # Add OPA to PATH
     echo 'Adding to PATH'
     echo "##vso[task.prependpath]$(System.ArtifactsDirectory)/opa"
