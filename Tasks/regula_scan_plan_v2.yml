@@ -5,4 +5,4 @@ steps:
     # Scan plan
     regula run $(Pipeline.Workspace)/Evaluate/plan.json -s critical
   name: 'RegulaScan'
-  displayName: 'Scan Terraform Plan with Regula'
+  displayName: 'Scan Plan with Regula'

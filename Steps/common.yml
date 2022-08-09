@@ -2,5 +2,5 @@ steps:
 
 # Checkout local repo
 - checkout: self
-  displayName: 'Checkout Repository'
+  displayName: 'Checkout repository'
   path: s/

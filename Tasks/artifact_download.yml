@@ -3,4 +3,4 @@ steps:
 # Download artifact
 - download: current
   artifact: Evaluate
-  displayName: 'Download Artifact'
+  displayName: 'Download artifact'
