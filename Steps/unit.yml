@@ -1,12 +1,15 @@
 steps:
 
+# Terraform steps
+- template: ../Tasks/terraform_install.yml
+
 # Go Steps
 - template: ../Tasks/go.yml
   parameters:
     arguments: '-v unit_test.go'
 
-# Terraform steps
-#- template: ../Tasks/terraform_init.yml
+# Terraform steps (after test removes backend)
+- template: ../Tasks/terraform_init.yml
 
 # Regula steps
 - template: ../Tasks/regula.yml

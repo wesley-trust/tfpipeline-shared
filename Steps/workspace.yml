@@ -1,6 +1,7 @@
 steps:
 
 # Terraform init
+- template: ../Tasks/terraform_install.yml
 - template: ../Tasks/terraform_init.yml
 
 # Create workspace (if does not exist)

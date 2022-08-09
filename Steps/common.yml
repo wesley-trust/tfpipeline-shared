@@ -4,6 +4,3 @@ steps:
 - checkout: self
   displayName: 'Checkout Repository'
   path: s/
-
-# Terraform install step
-- template: ../Tasks/terraform_install.yml
