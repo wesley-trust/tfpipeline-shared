@@ -2,7 +2,7 @@ steps:
 
 # Publish artifact
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish plan artifact'
+  displayName: 'Publish artifact'
   inputs:
     targetPath: '$(Pipeline.Workspace)/Output'
     artifact: '${{ parameters.artifact }}'
