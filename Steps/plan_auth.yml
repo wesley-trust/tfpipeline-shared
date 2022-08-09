@@ -4,24 +4,17 @@ steps:
 - template: ../Tasks/terraform_init.yml
 - template: ../Tasks/workspace.yml
 
+# Download artifact
+- template: ../Tasks/artifact_download.yml
+
 # Create artifact directory
 - template: ../Tasks/mkdir.yml
-
-# Terraform Plan
-- template: ../Tasks/terraform.yml
-  parameters:
-    name: 'Plan'
-    displayName: 'Terraform Plan'
-    condition: succeeded()
-    command: 'plan'
-    publishPlanResults: 'apply_terraform.tfplan'
-    commandOptions: '-out=$(Pipeline.Workspace)/Output/apply_terraform.tfplan -detailed-exitcode'
 
 # Regula steps
 - template: ../Tasks/regula.yml
 
 # Scan Terraform Plan with Regula
-- template: ../Tasks/regula_scan_plan.yml
+- template: ../Tasks/regula_scan_plan_v2.yml
 
 # OPA steps
 - template: ../Tasks/opa.yml
@@ -32,10 +25,7 @@ steps:
 # Set pipeline output variable if OPA has auto approved
 - template: ../Tasks/opa_variable.yml
 
-# Set pipeline output variable if there are changes
-- template: ../Tasks/variable.yml
-
 # Publish artifact
 - template: ../Tasks/artifact.yml
   parameters:
-    artifact: 'Evaluate'
+    artifact: 'OPA'
