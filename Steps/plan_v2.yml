@@ -1,0 +1,26 @@
+steps:
+
+# Terraform steps
+- template: ../Tasks/terraform_init.yml
+- template: ../Tasks/workspace.yml
+
+# Create artifact directory
+- template: ../Tasks/mkdir.yml
+
+# Terraform Plan
+- template: ../Tasks/terraform.yml
+  parameters:
+    name: 'Plan'
+    displayName: 'Terraform Plan'
+    condition: succeeded()
+    command: 'plan'
+    publishPlanResults: 'apply_terraform.tfplan'
+    commandOptions: '-out=$(Pipeline.Workspace)/Output/apply_terraform.tfplan -detailed-exitcode'
+
+# Set pipeline output variable if there are changes
+- template: ../Tasks/variable.yml
+
+# Publish artifact
+- template: ../Tasks/artifact.yml
+  parameters:
+    artifact: 'Evaluate'
