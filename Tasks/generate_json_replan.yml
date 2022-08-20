@@ -1,0 +1,10 @@
+steps:
+
+# Generate JSON Plan
+- bash: |
+    # Set working directory
+    cd $(System.DefaultWorkingDirectory)
+    # Generate JSON plan
+    terraform show -json $(Pipeline.Workspace)/Output/reapply_terraform.tfplan >$(Pipeline.Workspace)/Output/plan.json
+  name: 'JSONPlan'
+  displayName: 'Generate JSON Plan'
