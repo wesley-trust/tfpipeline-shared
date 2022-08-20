@@ -2,5 +2,5 @@ steps:
 
 # Download artifact
 - download: current
-  artifact: 'Evaluate'
+  artifact: 'ReEvaluate'
   displayName: 'Download artifact'

@@ -1,9 +1,7 @@
 steps:
 
 # Download artifact
-- template: ../Tasks/artifact_download.yml
-  parameters:
-    artifact: 'ReEvaluate'
+- template: ../Tasks/artifact_redownload.yml
 
 # Create artifact directory
 - template: ../Tasks/mkdir.yml
