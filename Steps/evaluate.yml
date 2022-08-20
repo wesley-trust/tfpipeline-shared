@@ -2,6 +2,8 @@ steps:
 
 # Download artifact
 - template: ../Tasks/artifact_download.yml
+  parameters:
+    artifact: 'Evaluate'
 
 # Create artifact directory
 - template: ../Tasks/mkdir.yml
