@@ -10,7 +10,7 @@ steps:
 - template: ../Tasks/regula.yml
 
 # Scan Terraform Plan with Regula
-- template: ../Tasks/regula_scan_plan_v2.yml
+- template: ../Tasks/regula_scan_replan_v2.yml
 
 # OPA steps
 - template: ../Tasks/opa.yml
