@@ -1,0 +1,27 @@
+steps:
+
+# Download artifact
+- template: ../Tasks/artifact_download.yml
+
+# Create artifact directory
+- template: ../Tasks/mkdir.yml
+
+# Regula steps
+- template: ../Tasks/regula.yml
+
+# Scan Terraform Plan with Regula
+- template: ../Tasks/regula_scan_plan_v2.yml
+
+# OPA steps
+- template: ../Tasks/opa.yml
+
+# Evaluate OPA Policy
+- template: ../Tasks/opa_redecision.yml
+
+# Set pipeline output variable if OPA has auto approved
+- template: ../Tasks/opa_variable.yml
+
+# Publish artifact
+- template: ../Tasks/artifact.yml
+  parameters:
+    artifact: 'ReOPA'
