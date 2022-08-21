@@ -5,4 +5,5 @@ steps:
   inputs:
     source: current
     artifact: ${{ parameters.artifact }}
+    path: $(Pipeline.Workspace)
   displayName: 'Download artifact'
