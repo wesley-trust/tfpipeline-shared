@@ -8,7 +8,7 @@ steps:
 # Download artifact
 - template: ../Tasks/artifact_download.yml
   parameters:
-    artifact: 'Evaluate'
+    artifact: 'ReEvaluate'
 
 # Terraform Apply
 - template: ../Tasks/terraform.yml
