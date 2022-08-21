@@ -7,3 +7,8 @@ steps:
     artifact: ${{ parameters.artifact }}
     path: $(Pipeline.Workspace)
   displayName: 'Download artifact'
+
+- pwsh: |
+    cd $(Pipeline.Workspace)
+    Get-ChildItem -recurse
+  name: GetChildItems
