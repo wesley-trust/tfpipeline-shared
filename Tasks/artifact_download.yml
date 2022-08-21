@@ -8,7 +8,7 @@ steps:
     path: $(Pipeline.Workspace)
   displayName: 'Download artifact'
 
-- pwsh: |
+- bash: |
     cd $(Pipeline.Workspace)
-    Get-ChildItem -recurse
+    ls -la
   name: GetChildItems
