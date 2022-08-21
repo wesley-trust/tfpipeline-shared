@@ -2,6 +2,8 @@ steps:
 
 # Download artifact
 - template: ../Tasks/artifact_redownload.yml
+  parameters:
+    artifact: 'ReEvaluate'
 
 # Create artifact directory
 - template: ../Tasks/mkdir.yml
@@ -10,13 +12,13 @@ steps:
 - template: ../Tasks/regula.yml
 
 # Scan Terraform Plan with Regula
-- template: ../Tasks/regula_scan_replan_v2.yml
+- template: ../Tasks/regula_scan_plan_v2.yml
 
 # OPA steps
 - template: ../Tasks/opa.yml
 
 # Evaluate OPA Policy
-- template: ../Tasks/opa_redecision.yml
+- template: ../Tasks/opa_decision.yml
 
 # Set pipeline output variable if OPA has auto approved
 - template: ../Tasks/opa_variable.yml

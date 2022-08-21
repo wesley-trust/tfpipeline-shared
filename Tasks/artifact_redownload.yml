@@ -1,6 +1,0 @@
-steps:
-
-# Download artifact
-- download: current
-  artifact: 'ReEvaluate'
-  displayName: 'Download artifact'

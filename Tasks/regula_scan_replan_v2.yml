@@ -1,8 +1,0 @@
-steps:
-
-# Scan Terraform Plan with Regula
-- bash: |
-    # Scan plan
-    regula run $(Pipeline.Workspace)/ReEvaluate/plan.json -s critical
-  name: 'RegulaScan'
-  displayName: 'Scan Plan with Regula'

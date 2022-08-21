@@ -3,6 +3,6 @@ steps:
 # Scan Terraform Plan with Regula
 - bash: |
     # Scan plan
-    regula run $(Pipeline.Workspace)/Evaluate/plan.json -s critical
+    regula run $(Pipeline.Workspace)/input/plan.json -s critical
   name: 'RegulaScan'
   displayName: 'Scan Plan with Regula'

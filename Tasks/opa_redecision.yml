@@ -1,9 +1,0 @@
-steps:
-
-# Evaluate Plan with OPA
-- bash: |
-    # Evaluate plan with OPA
-    opa exec --decision terraform/analysis/authz --bundle policy/ $(Pipeline.Workspace)/ReEvaluate/plan.json > $(Pipeline.Workspace)/Output/opa_decision.json
-    opa exec --decision terraform/analysis/score --bundle policy/ $(Pipeline.Workspace)/ReEvaluate/plan.json > $(Pipeline.Workspace)/Output/opa_score.json
-  name: 'OPADecision'
-  displayName: 'Evaluate Plan with OPA'

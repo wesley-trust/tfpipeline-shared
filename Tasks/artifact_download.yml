@@ -5,10 +5,5 @@ steps:
   inputs:
     source: current
     artifact: ${{ parameters.artifact }}
-    path: $(Pipeline.Workspace)
+    path: $(Pipeline.Workspace)/input
   displayName: 'Download artifact'
-
-- bash: |
-    cd $(Pipeline.Workspace)
-    ls -la
-  name: GetChildItems
