@@ -15,4 +15,4 @@ steps:
     displayName: 'Terraform Apply'
     condition: succeeded()
     command: 'apply'
-    commandOptions: '$(Pipeline.Workspace)/Evaluate/apply_terraform.tfplan'
+    commandOptions: '$(Pipeline.Workspace)/input/apply_terraform.tfplan'
