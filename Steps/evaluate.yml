@@ -1,7 +1,7 @@
 steps:
 
 # Download artifact
-- template: ../Tasks/bash/artifact_download.yml
+- template: ../Tasks/artifact/artifact_download.yml
   parameters:
     artifact: 'Evaluate'
 
