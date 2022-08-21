@@ -1,7 +1,7 @@
 steps:
 
 # Download artifact
-- template: ../Tasks/artifact_redownload.yml
+- template: ../Tasks/artifact_download.yml
   parameters:
     artifact: 'ReEvaluate'
 
