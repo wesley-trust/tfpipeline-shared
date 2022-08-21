@@ -1,17 +1,17 @@
 steps:
 
 # Terraform steps
-- template: ../Tasks/terraform_install.yml
-- template: ../Tasks/terraform_init.yml
-- template: ../Tasks/workspace.yml
+- template: ../Tasks/terraform/terraform_install.yml
+- template: ../Tasks/terraform/terraform_init.yml
+- template: ../Tasks/terraform/workspace.yml
 
 # Download artifact
-- template: ../Tasks/artifact_download.yml
+- template: ../Tasks/artifact/artifact_download.yml
   parameters:
     artifact: 'Evaluate'
 
 # Terraform Apply
-- template: ../Tasks/terraform.yml
+- template: ../Tasks/terraform/terraform.yml
   parameters:
     name: 'Apply'
     displayName: 'Terraform Apply'

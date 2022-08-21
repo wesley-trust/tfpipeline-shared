@@ -1,9 +1,9 @@
 steps:
 
 # Terraform steps
-- template: ../Tasks/terraform_install.yml
+- template: ../Tasks/terraform/terraform_install.yml
 
 # Go steps
-- template: ../Tasks/go.yml
+- template: ../Tasks/go/go.yml
   parameters:
     arguments: '-v integration_test.go'

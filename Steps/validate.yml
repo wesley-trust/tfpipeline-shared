@@ -1,8 +1,8 @@
 steps:
 
 # Terraform steps
-- template: ../Tasks/terraform_install.yml
-- template: ../Tasks/terraform_init.yml
+- template: ../Tasks/terraform/terraform_install.yml
+- template: ../Tasks/terraform/terraform_init.yml
 # - template: ../Tasks/terraform_validate.yml
 
 # Regula steps
@@ -12,4 +12,4 @@ steps:
 # - template: ../Tasks/regula_scan_hcl.yml
 
 # Select workspace (if exists)
-- template: ../Tasks/workspace.yml
+- template: ../Tasks/terraform/workspace.yml

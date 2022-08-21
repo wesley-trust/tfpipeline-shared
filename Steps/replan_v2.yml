@@ -1,15 +1,15 @@
 steps:
 
 # Terraform steps
-- template: ../Tasks/terraform_install.yml
-- template: ../Tasks/terraform_init.yml
-- template: ../Tasks/workspace.yml
+- template: ../Tasks/terraform/terraform_install.yml
+- template: ../Tasks/terraform/terraform_init.yml
+- template: ../Tasks/terraform/workspace.yml
 
 # Create artifact directory
-- template: ../Tasks/mkdir.yml
+- template: ../Tasks/bash/mkdir.yml
 
 # Terraform Plan
-- template: ../Tasks/terraform.yml
+- template: ../Tasks/terraform/terraform.yml
   parameters:
     name: 'Plan'
     displayName: 'Terraform Plan'
@@ -19,12 +19,12 @@ steps:
     commandOptions: '-out=$(Pipeline.Workspace)/Output/apply_terraform.tfplan -detailed-exitcode'
 
 # Generate JSON Plan
-- template: ../Tasks/generate_json_plan.yml
+- template: ../Tasks/bash/generate_json_plan.yml
 
 # Set pipeline output variable if there are changes
-- template: ../Tasks/variable.yml
+- template: ../Tasks/bash/set_variable.yml
 
 # Publish artifact
-- template: ../Tasks/artifact.yml
+- template: ../Tasks/artifact/artifact_publish.yml
   parameters:
     artifact: 'ReEvaluate'
