@@ -15,11 +15,11 @@ steps:
     displayName: 'Terraform Plan'
     condition: succeeded()
     command: 'plan'
-    publishPlanResults: 'apply_terraform.tfplan'
+    publishPlanResults: 'reapply_terraform.tfplan'
     commandOptions: '-out=$(Pipeline.Workspace)/Output/reapply_terraform.tfplan -detailed-exitcode'
 
 # Generate JSON Plan
-- template: ../Tasks/generate_json_replan.yml
+- template: ../Tasks/generate_json_plan.yml
 
 # Set pipeline output variable if there are changes
 - template: ../Tasks/variable.yml
