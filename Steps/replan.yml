@@ -7,22 +7,19 @@ steps:
 
 # Create artifact directory
 - template: ../Tasks/bash/mkdir.yml
-    
+
 # Terraform Plan
 - template: ../Tasks/terraform/terraform.yml
   parameters:
-    name: 'RePlan'
+    name: 'Plan'
     displayName: 'Terraform Plan'
     condition: succeeded()
     command: 'plan'
     publishPlanResults: 'reapply_terraform.tfplan'
-    commandOptions: '-out=$(Pipeline.Workspace)/Output/reapply_terraform.tfplan -detailed-exitcode'
+    commandOptions: '-out=$(Pipeline.Workspace)/Output/apply_terraform.tfplan -detailed-exitcode'
 
-# Regula steps
-- template: ../Tasks/regula/regula.yml
-
-# Scan Terraform Plan with Regula
-- template: ../Tasks/regula/regula_scan_plan.yml
+# Generate JSON Plan
+- template: ../Tasks/bash/generate_json_plan.yml
 
 # Set pipeline output variable if there are changes
 - template: ../Tasks/bash/set_variable.yml
