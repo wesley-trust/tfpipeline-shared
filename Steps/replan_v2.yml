@@ -16,7 +16,7 @@ steps:
     condition: succeeded()
     command: 'plan'
     publishPlanResults: 'reapply_terraform.tfplan'
-    commandOptions: '-out=$(Pipeline.Workspace)/Output/reapply_terraform.tfplan -detailed-exitcode'
+    commandOptions: '-out=$(Pipeline.Workspace)/Output/apply_terraform.tfplan -detailed-exitcode'
 
 # Generate JSON Plan
 - template: ../Tasks/generate_json_plan.yml
