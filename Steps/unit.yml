@@ -2,6 +2,7 @@ steps:
 
 # Terraform steps
 - template: ../Tasks/terraform/terraform_install.yml
+- template: ../Tasks/terraform/terraform_fmt.yml
 
 # Go Steps
 - template: ../Tasks/go/go.yml

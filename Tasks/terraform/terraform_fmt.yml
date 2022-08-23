@@ -1,0 +1,25 @@
+steps:
+
+# Check code formatting
+- pwsh: |
+    
+    # Clear variables
+    $LASTEXITCODE = $null
+    $fmt = $null
+
+    # Check Terraform code formatting
+    $fmt = terraform fmt -recursive -check
+
+    # Check result of code formatting
+    if ($LASTEXITCODE -eq 0){
+      Write-Host "Terraform code is correctly formatted"
+    }
+    else {
+      Write-Host "Terraform code is not correctly formatted, incorrectly formatted files are listed below"
+      $fmt
+      $ErrorMessage = "Terraform code is not correctly formatted, run 'terraform fmt -recursive' at the root level prior to commit"
+      Write-Error $ErrorMessage
+    }
+  name: 'CodeFormatting'
+  displayName: 'Check code formatting'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
