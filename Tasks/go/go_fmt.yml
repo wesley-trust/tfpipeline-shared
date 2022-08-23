@@ -1,0 +1,24 @@
+steps:
+
+# Check code formatting
+- pwsh: |
+    
+    # Clear variables
+    $fmt = $null
+
+    # Check Golang code formatting
+    $fmt = gofmt -l .
+
+    # Check result of code formatting
+    if ($null -eq $fmt){
+      Write-Host "Golang code is correctly formatted"
+    }
+    else {
+      Write-Host "Golang code is not correctly formatted, incorrectly formatted files are listed below"
+      $fmt
+      $ErrorMessage = "Golang code is not correctly formatted, run 'gofmt -l -w .' at the root level prior to commit"
+      Write-Error $ErrorMessage
+    }
+  name: 'CodeFormatting'
+  displayName: 'Check Golang formatting'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'

@@ -5,7 +5,9 @@ steps:
 - template: ../Tasks/terraform/terraform_fmt.yml
 
 # Go Steps
-- template: ../Tasks/go/go.yml
+- template: ../Tasks/go/go_setup.yml
+- template: ../Tasks/go/go_fmt.yml
+- template: ../Tasks/go/go_tests.yml
   parameters:
     arguments: '-v unit_test.go'
 

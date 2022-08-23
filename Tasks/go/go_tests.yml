@@ -1,0 +1,16 @@
+steps:
+
+# Run Go Test
+- task: Go@0
+  displayName: 'Run tests'
+  inputs:
+    command: 'test'
+    arguments: '-timeout 4h ${{ parameters.arguments }}'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tests'
+  env:
+      ARM_TENANT_ID: $(TenantId)
+      ARM_CLIENT_ID: $(ServicePrincipalId)
+      ARM_CLIENT_SECRET: $(ServicePrincipalKey)
+      ARM_SUBSCRIPTION_ID: $(SubscriptionId)
+      AZDO_PERSONAL_ACCESS_TOKEN: $(org_pat)
+      AZDO_ORG_SERVICE_URL: $(org_url)
