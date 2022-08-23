@@ -19,6 +19,6 @@ steps:
       $ErrorMessage = "Golang code is not correctly formatted, run 'gofmt -l -w .' at the root level prior to commit"
       Write-Error $ErrorMessage
     }
-  name: 'CodeFormatting'
+  name: 'GolangCodeFormatting'
   displayName: 'Check Golang formatting'
   workingDirectory: '$(System.DefaultWorkingDirectory)'

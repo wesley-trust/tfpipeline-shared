@@ -20,6 +20,6 @@ steps:
       $ErrorMessage = "Terraform code is not correctly formatted, run 'terraform fmt -recursive' at the root level prior to commit"
       Write-Error $ErrorMessage
     }
-  name: 'CodeFormatting'
+  name: 'TerraformCodeFormatting'
   displayName: 'Check Terraform formatting'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
