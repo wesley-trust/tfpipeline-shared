@@ -15,7 +15,7 @@ steps:
 - template: ../Tasks/regula/regula_scan_plan_v2.yml
 
 # OPA steps
-- template: ../Tasks/opa/opa.yml
+- template: ../Tasks/opa/opa_setup.yml
 
 # Evaluate OPA Policy
 - template: ../Tasks/opa/opa_decision.yml

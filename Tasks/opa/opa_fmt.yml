@@ -1,0 +1,24 @@
+steps:
+
+# Check code formatting
+- pwsh: |
+    
+    # Clear variables
+    $fmt = $null
+
+    # Check OPA Rego code formatting
+    $fmt = opa fmt -l .
+
+    # Check result of code formatting
+    if ($null -eq $fmt){
+      Write-Host "OPA Rego code is correctly formatted"
+    }
+    else {
+      Write-Host "OPA Rego code is not correctly formatted, incorrectly formatted files are listed below"
+      $fmt
+      $ErrorMessage = "OPA Rego code is not correctly formatted, run 'opa fmt -w .' at the root level prior to commit"
+      Write-Error $ErrorMessage
+    }
+  name: 'OPACodeFormatting'
+  displayName: 'Check OPA Rego formatting'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
