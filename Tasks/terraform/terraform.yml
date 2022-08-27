@@ -14,3 +14,4 @@ steps:
   env:
     AZDO_PERSONAL_ACCESS_TOKEN: $(org_pat)
     AZDO_ORG_SERVICE_URL: $(org_url)
+    GITHUB_TOKEN: $(github_token)
