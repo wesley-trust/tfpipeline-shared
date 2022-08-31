@@ -1,0 +1,23 @@
+steps:
+
+# Generate JSON Plan
+- pwsh: |
+    
+    # Clear variables
+    $fmt = $null
+
+    # Check code formatting
+    $fmt = packer fmt -recursive .
+
+    # Check result of code formatting
+    if ($null -eq $fmt){
+      Write-Host "Packer code is correctly formatted"
+    }
+    else {
+      Write-Host "Packer code is not correctly formatted, incorrectly formatted files are listed below"
+      $fmt
+      $ErrorMessage = "Packer code is not correctly formatted, run 'packer fmt -recursive .' at the root level prior to commit"
+      Write-Error $ErrorMessage
+    }
+  name: 'PackerCodeFormatting'
+  displayName: 'Check Packer Code Formatting'

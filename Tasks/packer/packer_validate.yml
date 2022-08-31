@@ -1,0 +1,8 @@
+steps:
+
+# Generate JSON Plan
+- bash: |
+    packer validate .
+  name: 'Packer validate'
+  displayName: 'Packer validate'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'

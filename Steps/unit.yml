@@ -8,7 +8,6 @@ steps:
 - template: ../Tasks/opa/opa_setup.yml
 - template: ../Tasks/opa/opa_fmt.yml
 
-
 # Go Steps
 - template: ../Tasks/go/go_setup.yml
 - template: ../Tasks/go/go_fmt.yml
