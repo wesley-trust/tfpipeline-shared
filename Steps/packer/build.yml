@@ -1,6 +1,6 @@
 steps:
 
 # Packer steps
-- template: ../Tasks/packer/packer_install.yml
-- template: ../Tasks/packer/packer_init.yml
-- template: ../Tasks/packer/packer_build.yml
+- template: ../../Tasks/packer/packer_install.yml
+- template: ../../Tasks/packer/packer_init.yml
+- template: ../../Tasks/packer/packer_build.yml
