@@ -3,6 +3,6 @@ steps:
 # Generate JSON Plan
 - bash: |
     packer build .
-  name: 'Packer build'
+  name: 'PackerBuild'
   displayName: 'Packer build'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
