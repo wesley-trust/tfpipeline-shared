@@ -4,3 +4,4 @@ steps:
 - template: ../../Tasks/packer/packer_install.yml
 - template: ../../Tasks/packer/packer_init.yml
 - template: ../../Tasks/packer/packer_fmt.yml
+- template: ../../Tasks/packer/packer_validate.yml
