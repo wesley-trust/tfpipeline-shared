@@ -1,0 +1,5 @@
+steps:
+
+# Terraform steps
+- template: ../../Tasks/packer/packer_install.yml
+- template: ../../Tasks/packer/packer_init.yml
