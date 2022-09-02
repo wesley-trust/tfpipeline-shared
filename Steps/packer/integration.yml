@@ -1,5 +1,8 @@
 steps:
 
-# Terraform steps
+# Packer steps
 - template: ../../Tasks/packer/packer_install.yml
 - template: ../../Tasks/packer/packer_init.yml
+
+# Azure login
+- template: ../../Tasks/azure/azure_login.yml

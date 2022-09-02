@@ -1,0 +1,10 @@
+steps:
+
+# Login to Azure
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'ARM-Alpha'
+    useGlobalConfig: true
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: ''
