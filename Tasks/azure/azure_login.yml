@@ -7,4 +7,4 @@ steps:
     useGlobalConfig: true
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: ''
+    inlineScript: 'az account show'
