@@ -1,0 +1,20 @@
+steps:
+
+# Check code formatting
+- pwsh: |
+    
+    Install-Module -Name Az -Repository PSGallery -Force
+    Set-Location c:\
+    git clone https://github.com/actions/runner-images.git
+    $Random = Get-Random
+    Set-Location C:\runner-images
+    Import-Module .\helpers\GenerateResourcesAndImage.ps1
+    GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName "pkrrunngerimagebuild$Random" -ImageGenerationRepositoryRoot "$pwd" -ImageType $(ImageType) -AzureLocation "UK South" -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
+  name: 'CreateRunnerImage'
+  displayName: 'Create Runner Image'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  env:
+      ARM_TENANT_ID: $(TenantId)
+      ARM_CLIENT_ID: $(ServicePrincipalId)
+      ARM_CLIENT_SECRET: $(ServicePrincipalKey)
+      ARM_SUBSCRIPTION_ID: $(SubscriptionId)
