@@ -8,7 +8,7 @@ steps:
     $Random = Get-Random
     Set-Location ./runner-images
     Import-Module ./helpers/GenerateResourcesAndImage.ps1
-    GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName "pkrrunngerimagebuild$Random" -ImageGenerationRepositoryRoot "$pwd" -ImageType Ubuntu1804 -AzureLocation "UK South" -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
+    GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName "pkrrunngerimagebuild$Random" -ImageGenerationRepositoryRoot "$pwd" -ImageType "${{ parameters.imageType }}" -AzureLocation "${{ parameters.location }}" -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
   name: 'CreateRunnerImage'
   displayName: 'Create Runner Image'
   workingDirectory: '$(System.DefaultWorkingDirectory)'

@@ -3,3 +3,6 @@ steps:
 # Packer steps
 - template: ../../Tasks/packer/packer_install.yml
 - template: ../../Tasks/pwsh/create_runner_image.yml
+  parameters:
+    imageType: '${{ parameters.imageType }}'
+    location: '${{ parameters.location }}'
