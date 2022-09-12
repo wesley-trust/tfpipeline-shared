@@ -4,7 +4,7 @@ steps:
 - pwsh: |
     
     echo "${{ parameters.imageType }}" 
-    echo "${{ parameters.location }}"
+    echo $env:TEST
     
     Install-Module -Name Az -Repository PSGallery -Force
     git clone https://github.com/actions/runner-images.git
@@ -20,3 +20,4 @@ steps:
       ARM_CLIENT_ID: $(ServicePrincipalId)
       ARM_CLIENT_SECRET: $(ServicePrincipalKey)
       ARM_SUBSCRIPTION_ID: $(SubscriptionId)
+      TEST: ${{ parameters.location }}
