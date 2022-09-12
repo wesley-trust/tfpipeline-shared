@@ -3,6 +3,9 @@ steps:
 # Check code formatting
 - pwsh: |
     
+    echo "${{ parameters.imageType }}" 
+    echo "${{ parameters.location }}"
+    
     Install-Module -Name Az -Repository PSGallery -Force
     git clone https://github.com/actions/runner-images.git
     $Random = Get-Random
