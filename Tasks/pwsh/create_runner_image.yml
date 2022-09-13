@@ -9,7 +9,7 @@ steps:
     Install-Module -Name Az -Repository PSGallery -Force
     git clone https://github.com/actions/runner-images.git
     $Random = Get-Random
-    $ResourceGroupName = ""pkrimagebuild$Random"
+    $ResourceGroupName = "pkrimagebuild$Random"
     Set-Location ./runner-images
     Import-Module ./helpers/GenerateResourcesAndImage.ps1
     GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName $ResourceGroupName -ImageGenerationRepositoryRoot "$pwd" -ImageType "${{ parameters.imageType }}" -AzureLocation "${{ parameters.location }}" -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
