@@ -2,10 +2,7 @@ steps:
 
 # Check code formatting
 - pwsh: |
-    
-    echo "${{ parameters.imageType }}" 
-    echo $env:TEST
-    
+        
     Install-Module -Name Az -Repository PSGallery -Force
     git clone https://github.com/actions/runner-images.git
     $Random = Get-Random
@@ -16,9 +13,9 @@ steps:
   name: 'CreateRunnerImage'
   displayName: 'Create Runner Image'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
+  retryCountOnTaskFailure: 5
   env:
       ARM_TENANT_ID: $(TenantId)
       ARM_CLIENT_ID: $(ServicePrincipalId)
       ARM_CLIENT_SECRET: $(ServicePrincipalKey)
       ARM_SUBSCRIPTION_ID: $(SubscriptionId)
-      TEST: ${{ parameters.location }}
