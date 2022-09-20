@@ -6,3 +6,4 @@ steps:
   parameters:
     imageType: ${{ parameters.imageType }}
     location: ${{ parameters.location }}
+    imageResourceGroupName: ${{ parameters.imageResourceGroupName }}

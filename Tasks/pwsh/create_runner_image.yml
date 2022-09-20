@@ -2,14 +2,51 @@ steps:
 
 # Check code formatting
 - pwsh: |
-        
-    Install-Module -Name Az -Repository PSGallery -Force
-    git clone https://github.com/actions/runner-images.git
+    
+    # Build Variables
     $Random = Get-Random
-    $ResourceGroupName = "pkrimagebuild$Random"
+    $BuildResourceGroupName = "pkrimagebuild$Random"
+    $Location = "${{ parameters.location }}"
+    $Platform = "${{ parameters.imageType }}"
+
+    # Install module
+    Install-Module -Name Az -Repository PSGallery -Force
+    
+    # Clone repo
+    git clone https://github.com/actions/runner-images.git
+
+    # Build Image
     Set-Location ./runner-images
     Import-Module ./helpers/GenerateResourcesAndImage.ps1
-    GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName $ResourceGroupName -ImageGenerationRepositoryRoot "$pwd" -ImageType "${{ parameters.imageType }}" -AzureLocation "${{ parameters.location }}" -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
+    GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName $BuildResourceGroupName -ImageGenerationRepositoryRoot "$pwd" -ImageType $Platform -AzureLocation $Location -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
+
+    # Image Variables
+    $Container = "system"
+    $ImageResourceGroupName = "${{ parameters.imageResourceGroupName }}"
+    $ImageName = "Image-$Platform"
+
+    # Get Build VHD URL
+    $AzResource = Get-AzResource -ResourceGroupName $BuildResourceGroupName
+    $AzStorageContext = New-AzStorageContext -StorageAccountName $AzResource.name -UseConnectedAccount
+    $AzStorageContainer = Get-AzStorageContainer -Container $Container -Context $AzStorageContext
+    $AzStorageBlob = Get-AzStorageBlob -Container $AzStorageContainer.name -Context $AzStorageContext | Where-Object {$_.BlobType -eq "PageBlob"}
+
+    # Generate Image Config
+    $imageConfig = New-AzImageConfig -Location $Location -HyperVGeneration "V2" -ZoneResilient
+    $osDiskVhdUri = $AzStorageBlob.ICloudBlob.uri.AbsoluteUri
+    Set-AzImageOsDisk -Image $imageConfig -OsType $Platform -OsState "Generalized" -BlobUri $osDiskVhdUri
+    
+    # Remove existing image group, if build VHD exists
+    if ($osDiskVhdUri) {$ImageResourceGroup = Get-AzResourceGroup -Name $ImageResourceGroupName}
+    if ($ImageResourceGroup) {Remove-AzResourceGroup -Name $ImageResourceGroup.ResourceGroupName -Force}
+    
+    # Generate Image
+    $DestinationResourceGroup = New-AzResourceGroup -Name $ImageResourceGroupName -Location $Location
+    $AzImage = New-AzImage -Image $imageConfig -ImageName $ImageName -ResourceGroupName $DestinationResourceGroup.ResourceGroupName
+    
+    # Cleanup build, if image was generated
+    if ($AzImage) {Remove-AzResourceGroup -Name $BuildResourceGroupName -Force}
+
   name: 'CreateRunnerImage'
   displayName: 'Create Runner Image'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
