@@ -7,8 +7,8 @@ steps:
     $Random = Get-Random
     $BuildResourceGroupName = "pkrimagebuild$Random"
     $Location = "${{ parameters.location }}"
-    $Platform = "${{ parameters.imageType }}"
-
+    $BuildImageType = "${{ parameters.imageType }}"
+    
     # Install module
     Install-Module -Name Az -Repository PSGallery -Force
     
@@ -18,11 +18,12 @@ steps:
     # Build Image
     Set-Location ./runner-images
     Import-Module ./helpers/GenerateResourcesAndImage.ps1
-    GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName $BuildResourceGroupName -ImageGenerationRepositoryRoot "$pwd" -ImageType $Platform -AzureLocation $Location -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
+    GenerateResourcesAndImage -SubscriptionId $env:ARM_SUBSCRIPTION_ID -ResourceGroupName $BuildResourceGroupName -ImageGenerationRepositoryRoot "$pwd" -ImageType $BuildImageType -AzureLocation $Location -AzureClientId $env:ARM_CLIENT_ID -AzureClientSecret $env:ARM_CLIENT_SECRET -AzureTenantId $env:ARM_TENANT_ID -EnableHttpsTrafficOnly $true -tags @{dept="devops";env="prod"}
 
     # Image Variables
     $Container = "system"
     $ImageResourceGroupName = "${{ parameters.imageResourceGroupName }}"
+    $Platform = "${{ parameters.platform }}""
     $ImageName = "Image-$Platform"
 
     # Get Build VHD URL
