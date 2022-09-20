@@ -23,7 +23,7 @@ steps:
     # Image Variables
     $Container = "system"
     $ImageResourceGroupName = "${{ parameters.imageResourceGroupName }}"
-    $Platform = "${{ parameters.platform }}""
+    $Platform = "${{ parameters.platform }}"
     $ImageName = "Image-$Platform"
 
     # Get Build VHD URL
