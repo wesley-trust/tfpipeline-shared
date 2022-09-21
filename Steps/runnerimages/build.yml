@@ -8,3 +8,6 @@ steps:
     platform: ${{ parameters.platform }}
     location: ${{ parameters.location }}
     imageResourceGroupName: ${{ parameters.imageResourceGroupName }}
+- template: ../../Tasks/pwsh/cleanup_runner_image.yml
+  parameters:
+    imageResourceGroupName: ${{ parameters.imageResourceGroupName }}

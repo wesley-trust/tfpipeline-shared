@@ -1,0 +1,31 @@
+steps:
+
+# Check code formatting
+- pwsh: |
+    
+    # Install module
+    Install-Module -Name Az -Repository PSGallery -Force
+
+    # Authenticate
+    $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $env:ARM_CLIENT_ID, $env:ARM_CLIENT_SECRET
+    Connect-AzAccount -ServicePrincipal -TenantId $(TenantId) -SubscriptionId $(SubscriptionId) -Credential $Credential
+
+    # Image Variables
+    $ImageResourceGroupName = "${{ parameters.imageResourceGroupName }}"
+    
+    # Get existing image
+    $ImageResourceGroup = Get-AzResourceGroup -Name $ImageResourceGroupName
+    if ($ImageResourceGroup) {$RemoveAzImage = Get-AzImage -ResourceGroupName $ImageResourceGroupName | Where-Object {$_.tags.version -eq "previous"}}
+    
+    # Cleanup
+    if ($RemoveAzImage) {$RemoveAzImage | Remove-AZImage -Force}  
+
+  name: 'CleanupRunnerImage'
+  displayName: 'Cleanup Runner Image'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  continueOnError: true
+  env:
+    ARM_TENANT_ID: $(TenantId)
+    ARM_CLIENT_ID: $(ServicePrincipalId)
+    ARM_CLIENT_SECRET: $(ServicePrincipalKey)
+    ARM_SUBSCRIPTION_ID: $(SubscriptionId)
