@@ -20,7 +20,7 @@ steps:
     # Cleanup
     if ($RemoveAzImage) {$RemoveAzImage | Remove-AZImage -Force}  
 
-  name: 'Cleanup_${{ parameters.imageResourceGroupName }}'
+  name: 'CleanupRunnerImage'
   displayName: 'Cleanup Runner Image'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   continueOnError: true
