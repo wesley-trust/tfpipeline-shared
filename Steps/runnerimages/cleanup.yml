@@ -1,0 +1,6 @@
+steps:
+
+# Cleanup
+- template: ../../Tasks/pwsh/cleanup_runner_image.yml
+  parameters:
+    imageResourceGroupName: ${{ parameters.imageResourceGroupName }}
