@@ -24,7 +24,9 @@ steps:
     $Container = "system"
     $ImageResourceGroupName = "${{ parameters.imageResourceGroupName }}"
     $Platform = "${{ parameters.platform }}"
-    $ImageName = "Image-$Platform"
+    $ImageNamePrefix = "Image-$Platform"
+    $ImageName = "$ImageNamePrefix-$Random"
+    $Tags = @{"version"="latest"; "environment"="Prod"; "deployment"="01"; "name_prefix"="$ImageNamePrefix"}
 
     # Get Build VHD URL
     $AzResource = Get-AzResource -ResourceGroupName $BuildResourceGroupName
@@ -35,18 +37,24 @@ steps:
     # Generate Image Config
     $imageConfig = New-AzImageConfig -Location $Location -HyperVGeneration "V2" -ZoneResilient
     $osDiskVhdUri = $AzStorageBlob.ICloudBlob.uri.AbsoluteUri
-    Set-AzImageOsDisk -Image $imageConfig -OsType $Platform -OsState "Generalized" -BlobUri $osDiskVhdUri
+    if ($osDiskVhdUri) {Set-AzImageOsDisk -Image $imageConfig -OsType $Platform -OsState "Generalized" -BlobUri $osDiskVhdUri}
     
-    # Remove existing image group, if build VHD exists
+    # Get existing image
     if ($osDiskVhdUri) {$ImageResourceGroup = Get-AzResourceGroup -Name $ImageResourceGroupName}
-    if ($ImageResourceGroup) {Remove-AzResourceGroup -Name $ImageResourceGroup.ResourceGroupName -Force}
-    
+    if ($ImageResourceGroup) {$PreviousAzImage = Get-AzImage -ResourceGroupName $ImageResourceGroupName | Where-Object {$_.tags.version -eq "latest"}}
+    if ($ImageResourceGroup) {$RemoveAzImage = Get-AzImage -ResourceGroupName $ImageResourceGroupName | Where-Object {$_.tags.version -eq "previous"}}
+
     # Generate Image
-    $DestinationResourceGroup = New-AzResourceGroup -Name $ImageResourceGroupName -Location $Location
-    $AzImage = New-AzImage -Image $imageConfig -ImageName $ImageName -ResourceGroupName $DestinationResourceGroup.ResourceGroupName
+    if (!$ImageResourceGroup) {$ImageResourceGroup = New-AzResourceGroup -Name $ImageResourceGroupName -Location $Location}
+    if ($ImageResourceGroup) {$AzImage = New-AzImage -Image $imageConfig -ImageName $ImageName -ResourceGroupName $ImageResourceGroup.ResourceGroupName}
     
-    # Cleanup build, if image was generated
+    # Update image tags
+    if ($AzImage) {New-AzTag -ResourceId $AzImage.Id -Tag $Tags}
+    if ($AzImage) { if ($PreviousAzImage) {Update-AzTag -ResourceId $PreviousAzImage.Id -Tag @{"version"="previous"} -Operation "Merge"}}
+    
+    # Cleanup
     if ($AzImage) {Remove-AzResourceGroup -Name $BuildResourceGroupName -Force}
+    if ($RemoveAzImage) {$RemoveAzImage | Remove-AZImage -Force}  
 
   name: 'CreateRunnerImage'
   displayName: 'Create Runner Image'
