@@ -4,3 +4,4 @@ steps:
 - checkout: self
   displayName: 'Checkout repository'
   path: s/
+  submodules: true
