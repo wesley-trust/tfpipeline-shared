@@ -6,8 +6,10 @@ steps:
     az login --service-principal -u $SERVICEPRINCIPALID -p $SERVICEPRINCIPALKEY --tenant $(TenantID)
     # Select subscription
     az account set --subscription $(SubscriptionId)
-  name: 'AzureLogin'
-  displayName: 'Authenticate with Azure'
+    # Deploy Bicep
+    az deployment sub ${{ parameters.command }} -f "${{ parameters.file }}" --location "${{ parameters.location }}"
+  name: 'AzureBicep'
+  displayName: 'Azure Bicep'
   env:
     SERVICEPRINCIPALID: $(ServicePrincipalId)
     SERVICEPRINCIPALKEY: $(ServicePrincipalKey)

@@ -1,0 +1,8 @@
+steps:
+
+# Terraform steps
+- template: ../Tasks/azure/bicep.yml
+  parameters:
+    file: ${{ parameters.file }}
+    location: ${{ parameters.location }}
+    command: ${{ parameters.command }}
