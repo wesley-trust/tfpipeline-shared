@@ -1,15 +1,29 @@
 steps:
 
 # Login to Azure
-- bash: |
+- pwsh: |
     # Login to Azure
     az login --service-principal -u $SERVICEPRINCIPALID -p $SERVICEPRINCIPALKEY --tenant $(TenantID)
+    
     # Select subscription
     az account set --subscription $(SubscriptionId)
-    # Deploy Bicep
-    az deployment sub ${{ parameters.command }} -f "${{ parameters.file }}" --location "${{ parameters.location }}"
+
+    # Variables
+    $Command = ${{ parameters.command }}
+    
+    # Bicep Subscription Command
+    az deployment sub $Command -f "${{ parameters.resource_group_file }}" --location "${{ parameters.location }}" | Tee-Object -Variable Result
+
+    # Get Resource Group Name
+    $JSON = $Result | ConvertFrom-Json -Depth 10
+    $Split = $json.properties.outputResources.id.split("/")
+    $ResourceGroupName = $Split[-1]
+
+    # Bicep Group Command
+    az deployment group $Command -f "${{ parameters.resources_file }}" --resource-group $ResourceGroupName
+
   name: 'AzureBicep'
-  displayName: 'Azure Bicep'
+  displayName: 'Azure Bicep Deployment'
   env:
     SERVICEPRINCIPALID: $(ServicePrincipalId)
     SERVICEPRINCIPALKEY: $(ServicePrincipalKey)

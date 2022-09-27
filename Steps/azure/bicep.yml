@@ -3,6 +3,7 @@ steps:
 # Terraform steps
 - template: ../../Tasks/azure/bicep.yml
   parameters:
-    file: ${{ parameters.file }}
+    resource_group_file: ${{ parameters.resource_group_file }}
+    resources_file: ${{ parameters.resources_file }}
     location: ${{ parameters.location }}
     command: ${{ parameters.command }}
