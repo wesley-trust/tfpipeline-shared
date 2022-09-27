@@ -3,13 +3,13 @@ steps:
 # Login to Azure
 - pwsh: |
     # Login to Azure
-    az login --service-principal -u $SERVICEPRINCIPALID -p $SERVICEPRINCIPALKEY --tenant $(TenantID)
+    az login --service-principal -u $env:SERVICEPRINCIPALID -p $env:SERVICEPRINCIPALKEY --tenant $(TenantID)
     
     # Select subscription
     az account set --subscription $(SubscriptionId)
 
     # Variables
-    $Command = ${{ parameters.command }}
+    $Command = "${{ parameters.command }}"
     
     # Bicep Subscription Command
     az deployment sub $Command -f "${{ parameters.resource_group_file }}" --location "${{ parameters.location }}" | Tee-Object -Variable Result
