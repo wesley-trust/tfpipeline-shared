@@ -20,10 +20,10 @@ steps:
     $ResourceGroupName = $Split[-1]
 
     # Bicep Group Command
-    az deployment group $Command -f "${{ parameters.resources_file }}" --resource-group $ResourceGroupName
+    az deployment group $Command -f "${{ parameters.resources_file }}" --resource-group $ResourceGroupName --mode "Complete"
 
   name: 'AzureBicep'
-  displayName: 'Azure Bicep Deployment'
+  displayName: 'Bicep Deployment'
   env:
     SERVICEPRINCIPALID: $(ServicePrincipalId)
     SERVICEPRINCIPALKEY: $(ServicePrincipalKey)
