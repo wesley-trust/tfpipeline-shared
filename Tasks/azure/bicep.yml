@@ -10,6 +10,7 @@ steps:
 
     # Variables
     $Command = "${{ parameters.command }}"
+    $Destroy = "${{ parameters.destroy }}"
     
     # Bicep Subscription Command
     az deployment sub $Command -f "${{ parameters.resource_group_file }}" --location "${{ parameters.location }}" | Tee-Object -Variable Result
@@ -21,6 +22,11 @@ steps:
 
     # Bicep Group Command
     az deployment group $Command -f "${{ parameters.resources_file }}" --resource-group $ResourceGroupName --mode "Complete"
+
+    # Remove Resource Group if variable is true
+    if ($Destroy){
+      az group delete --name $ResourceGroupName --yes
+    }
 
   name: 'AzureBicep'
   displayName: 'Bicep Deployment'

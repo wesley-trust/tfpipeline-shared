@@ -7,3 +7,4 @@ steps:
     resources_file: ${{ parameters.resources_file }}
     location: ${{ parameters.location }}
     command: ${{ parameters.command }}
+    destroy: ${{ parameters.destroy }}
