@@ -13,15 +13,7 @@ steps:
     $Destroy = "${{ parameters.destroy }}"
     
     # Bicep Subscription Command
-    az deployment sub $Command -f "${{ parameters.resource_group_file }}.bicep" --location "${{ parameters.location }}" | Tee-Object -Variable Result
-
-    # Get Resource Group Name
-    $JSON = $Result | ConvertFrom-Json -Depth 10
-    $Split = $json.properties.outputResources.id.split("/")
-    $ResourceGroupName = $Split[-1]
-
-    # Bicep Group Command
-    az deployment group $Command -f "${{ parameters.resources_file }}.bicep" --resource-group $ResourceGroupName --mode "Complete"
+    az deployment sub $Command -f "${{ parameters.resources_file }}_incremental.bicep" --location "${{ parameters.location }}" | Tee-Object -Variable Result
 
     # Remove Resource Group if variable is true
     if ($Destroy){
